@@ -27,15 +27,14 @@ public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecycler
         public static final String TAG="test2";
 
     public WeatherRecyclerAdapter(Context context, ArrayList<consolidated_weather> consolidatedweatherArrayList) {
-        Log.d(TAG, "WeatherRecyclerAdapter: ");
         this.context = context;
         this.consolidatedweatherArrayList = consolidatedweatherArrayList;
     }
 
-
     public void updateWeather (ArrayList<consolidated_weather> consolidatedweatherArrayList) {
         Log.d(TAG, "updateWeather: ");
         this.consolidatedweatherArrayList = consolidatedweatherArrayList;
+        Log.d(TAG, "updateWeather: "+consolidatedweatherArrayList.size());
         notifyDataSetChanged();
     }
 
@@ -58,8 +57,8 @@ public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecycler
         holder.weather_state_name.setText(thisweather.getWeather_state_name());
         holder.weather_state_abbr.setText(thisweather.getWeather_state_abbr());
         holder.wind_direction_compass.setText(thisweather.getWind_direction_compass());
-        holder.predictability.setText(thisweather.getPredictability());
 
+        holder.predictability.setText(String.valueOf(thisweather.getPredictability()));
         holder.wind_speed.setText(String.valueOf(thisweather.getWind_speed()));
         holder.wind_direction.setText(String.valueOf(thisweather.getWind_direction()));
         holder.min_temp.setText(String.valueOf(thisweather.getMin_temp()));

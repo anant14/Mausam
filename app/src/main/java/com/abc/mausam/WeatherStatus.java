@@ -9,9 +9,6 @@ import android.util.Log;
 import com.abc.mausam.API.WeatherAPI;
 import com.abc.mausam.Adapters.WeatherRecyclerAdapter;
 import com.abc.mausam.Models.Result;
-import com.abc.mausam.Models.consolidated_weather;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +29,6 @@ public class WeatherStatus extends AppCompatActivity{
 
         rvlist = (RecyclerView)findViewById(R.id.rvlist);
         rvlist.setLayoutManager(new LinearLayoutManager(this));
-        weatherRecyclerAdapter = new WeatherRecyclerAdapter(WeatherStatus.this,new ArrayList<consolidated_weather>());
-
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.metaweather.com/api/")
@@ -48,9 +42,11 @@ public class WeatherStatus extends AppCompatActivity{
         weatherAPI.getWeatherBywoeid(getIntent().getIntExtra("woeid",-1)).enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
+
                 Log.d(TAG, "onResponse: "+response.body().getConsolidated_weather());
-                /*weatherRecyclerAdapter.updateWeather(response.body().getConsolidated_weather());
-                rvlist.setAdapter(weatherRecyclerAdapter);*/
+                
+                weatherRecyclerAdapter = new WeatherRecyclerAdapter(WeatherStatus.this,response.body().getConsolidated_weather());
+                rvlist.setAdapter(weatherRecyclerAdapter);
             }
 
             @Override
