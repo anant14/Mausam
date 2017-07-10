@@ -48,8 +48,8 @@ public class WeatherStatus extends AppCompatActivity{
         weatherAPI.getWeatherBywoeid(getIntent().getIntExtra("woeid",-1)).enqueue(new Callback<Result>() {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {
-                Log.d(TAG, "onResponse: ");
-               /* weatherRecyclerAdapter.updateWeather(response.body().getWeather());
+                Log.d(TAG, "onResponse: "+response.body().getConsolidated_weather());
+                /*weatherRecyclerAdapter.updateWeather(response.body().getConsolidated_weather());
                 rvlist.setAdapter(weatherRecyclerAdapter);*/
             }
 

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class consolidated_weather {
 
-    private int id;
+   // private int id;
     private Date applicable_date;
     private String weather_state_name;
     private String weather_state_abbr;
@@ -22,7 +22,7 @@ public class consolidated_weather {
     private int predictability;
 
     public consolidated_weather(int id, Date applicable_date, String weather_state_name, String weather_state_abbr, float wind_speed, float wind_direction, String wind_direction_compass, float min_temp, float max_temp, float the_temp, float air_pressure, float humidity, float visibility, int predictability) {
-        this.id = id;
+     //   this.id = id;
         this.applicable_date = applicable_date;
         this.weather_state_name = weather_state_name;
         this.weather_state_abbr = weather_state_abbr;
@@ -38,9 +38,9 @@ public class consolidated_weather {
         this.predictability = predictability;
     }
 
-    public int getId() {
+   /*public int getId() {
         return id;
-    }
+    }*/
 
     public Date getApplicable_date() {
         return applicable_date;
