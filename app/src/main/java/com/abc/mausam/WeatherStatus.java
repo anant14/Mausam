@@ -8,7 +8,8 @@ import android.util.Log;
 
 import com.abc.mausam.API.WeatherAPI;
 import com.abc.mausam.Adapters.WeatherRecyclerAdapter;
-import com.abc.mausam.Models.Weather;
+import com.abc.mausam.Models.Result;
+import com.abc.mausam.Models.consolidated_weather;
 
 import java.util.ArrayList;
 
@@ -31,8 +32,8 @@ public class WeatherStatus extends AppCompatActivity{
 
         rvlist = (RecyclerView)findViewById(R.id.rvlist);
         rvlist.setLayoutManager(new LinearLayoutManager(this));
-        weatherRecyclerAdapter = new WeatherRecyclerAdapter(this , new ArrayList<Weather>());
-        rvlist.setAdapter(weatherRecyclerAdapter);
+        weatherRecyclerAdapter = new WeatherRecyclerAdapter(WeatherStatus.this,new ArrayList<consolidated_weather>());
+
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -43,26 +44,20 @@ public class WeatherStatus extends AppCompatActivity{
                 .build();
 
         WeatherAPI weatherAPI = retrofit.create(WeatherAPI.class);
-        Callback<ArrayList<Weather>> WeatherCallBack = new Callback<ArrayList<Weather>>() {
 
+        weatherAPI.getWeatherBywoeid(getIntent().getIntExtra("woeid",-1)).enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<ArrayList<Weather>> call, Response<ArrayList<Weather>> response) {
-                weatherRecyclerAdapter.updateWeather(response.body());
-                Log.d(TAG, "Response Recieved" + response);
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Log.d(TAG, "onResponse: ");
+               /* weatherRecyclerAdapter.updateWeather(response.body().getWeather());
+                rvlist.setAdapter(weatherRecyclerAdapter);*/
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Weather>> call, Throwable t) {
-                Log.d(TAG, "Response not recieved");
-
+            public void onFailure(Call<Result> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t);
             }
-        };
+        });
 
-        int woeidRecieved = getIntent().getIntExtra("woeid",-1);
-        Log.d(TAG, "woeid Recieved" +woeidRecieved);
-        if(woeidRecieved != -1){
-            weatherAPI.getWeatherBywoeid(woeidRecieved).enqueue(WeatherCallBack);
-            Log.d(TAG, "Woeid sent"+woeidRecieved);
-       }
     }
 }

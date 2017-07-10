@@ -47,7 +47,7 @@ public class PlaceLocator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 etplace = (EditText)findViewById(R.id.etplace);
-                final String place = etplace.getText().toString();
+                String place = etplace.getText().toString();
 
 
                 Retrofit retrofit = new Retrofit.Builder()
@@ -58,23 +58,20 @@ public class PlaceLocator extends AppCompatActivity {
                         .build();
 
                 LocationAPI locationAPI = retrofit.create(LocationAPI.class);
-                Callback<ArrayList<LocationSearch>> LocationCallback = new Callback<ArrayList<LocationSearch>>() {
+                Log.d(TAG, "onClick: "+place);
+              locationAPI.getLocation(place).enqueue(new Callback<ArrayList<LocationSearch>>() {
+                  @Override
+                  public void onResponse(Call<ArrayList<LocationSearch>> call, Response<ArrayList<LocationSearch>> response) {
 
-                    @Override
-                    public void onResponse(Call<ArrayList<LocationSearch>> call, Response<ArrayList<LocationSearch>> response) {
-                        placeRecyclerAdapter.updateLocation(response.body());
-                        Log.d(TAG, "Response Recieved" + response);
-                    }
+                      Log.d(TAG, "onResponse: "+response.body());
+                     placeRecyclerAdapter.updateLocation(response.body());
+                  }
 
-                    @Override
-                    public void onFailure(Call<ArrayList<LocationSearch>> call, Throwable t) {
-                        Log.d(TAG, "Response not recieved");
-
-                    }
-                };
-                locationAPI.getLocation(place).enqueue(LocationCallback);
-
-
+                  @Override
+                  public void onFailure(Call<ArrayList<LocationSearch>> call, Throwable t) {
+                      Log.d(TAG, "onFailure: "+t);
+                  }
+              });
             }
         });
     }

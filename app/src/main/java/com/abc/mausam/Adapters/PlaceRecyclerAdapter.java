@@ -44,6 +44,7 @@ public class PlaceRecyclerAdapter extends RecyclerView.Adapter<PlaceRecyclerAdap
     public void onBindViewHolder(PlaceViewHolder holder, int position) {
 
         final LocationSearch thislocation = locationSearchArrayList.get(position);
+
         holder.title.setText(thislocation.getTitle());
         holder.location_type.setText(thislocation.getLocation_type());
         holder.rootview.setOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,6 @@
 package com.abc.mausam.API;
 
-import com.abc.mausam.Models.Weather;
-
-import java.util.ArrayList;
+import com.abc.mausam.Models.Result;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,7 +13,5 @@ import retrofit2.http.Path;
 public interface WeatherAPI {
 
     @GET("location/{woeid}/")
-    Call<ArrayList<Weather>> getWeatherBywoeid (
-            @Path("woeid") int woeid
-    );
+    Call<Result> getWeatherBywoeid (@Path("woeid") int woeid);
 }

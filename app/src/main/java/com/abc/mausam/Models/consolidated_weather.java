@@ -1,17 +1,12 @@
 package com.abc.mausam.Models;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by Nikhil Arora on 10-07-2017.
  */
 
-public class Weather {
-
-    ArrayList<Weather> weathers;
-
-
+public class consolidated_weather {
 
     private int id;
     private Date applicable_date;
@@ -26,11 +21,7 @@ public class Weather {
     private float visibility;
     private int predictability;
 
-    public Weather(ArrayList<Weather> weathers) {
-        this.weathers = weathers;
-    }
-
-    public Weather(int id, Date applicable_date, String weather_state_name, String weather_state_abbr, float wind_speed, float wind_direction, String wind_direction_compass, float min_temp, float max_temp, float the_temp, float air_pressure, float humidity, float visibility, int predictability) {
+    public consolidated_weather(int id, Date applicable_date, String weather_state_name, String weather_state_abbr, float wind_speed, float wind_direction, String wind_direction_compass, float min_temp, float max_temp, float the_temp, float air_pressure, float humidity, float visibility, int predictability) {
         this.id = id;
         this.applicable_date = applicable_date;
         this.weather_state_name = weather_state_name;

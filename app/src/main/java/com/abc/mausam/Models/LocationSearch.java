@@ -27,4 +27,5 @@ public class LocationSearch {
     public Integer getWoeid() {
         return woeid;
     }
+
 }

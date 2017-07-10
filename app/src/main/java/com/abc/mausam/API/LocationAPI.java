@@ -15,7 +15,5 @@ import retrofit2.http.Query;
 public interface LocationAPI {
 
     @GET("location/search/")
-    Call<ArrayList<LocationSearch>> getLocation(
-            @Query("query") String place
-    );
+    Call<ArrayList<LocationSearch>> getLocation(@Query("query") String place);
 }

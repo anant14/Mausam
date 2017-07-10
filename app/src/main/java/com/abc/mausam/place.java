@@ -45,7 +45,6 @@ public class place extends AppCompatActivity {
 
         LocationAPI locationAPI = retrofit.create(LocationAPI.class);
         Callback<ArrayList<LocationSearch>> LocationCallback = new Callback<ArrayList<LocationSearch>>() {
-
             @Override
             public void onResponse(Call<ArrayList<LocationSearch>> call, Response<ArrayList<LocationSearch>> response) {
                 placeRecyclerAdapter.updateLocation(response.body());
@@ -58,11 +57,5 @@ public class place extends AppCompatActivity {
 
             }
         };
-
-
-
-        String placeRecieved = getIntent().getStringExtra("place");
-        Log.d(TAG, "onCreate: " + placeRecieved);
-        locationAPI.getLocation(placeRecieved).enqueue(LocationCallback);
     }
 }
